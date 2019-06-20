@@ -1,12 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+/**
+ * @file:   入口文件
+ * @author:  Allen OYang https://github.com/allenYetu211
+ */
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import BrowserRouters from './routes/index';
+import {Provider} from 'mobx-react';
+import store from '@/store';
+import './asset/style/global.scss';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import registerServiceWorker from './registerServiceWorker';
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const appStore = {
+  store
+};
+
+ReactDOM.render(
+  <Provider {...appStore}>
+    <BrowserRouters/>
+</Provider>, document.getElementById('root')as HTMLElement);
+registerServiceWorker();
